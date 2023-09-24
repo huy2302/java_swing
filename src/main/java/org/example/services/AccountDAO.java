@@ -69,6 +69,9 @@ public class AccountDAO {
         }
         return accounts;
     }
+    public boolean addAccount(String username, String password) {
+        return true;
+    }
     public boolean deleteAccount(int id) {
         PreparedStatement preparedStatement = null;
 

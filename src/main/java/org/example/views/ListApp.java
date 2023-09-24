@@ -11,8 +11,7 @@ import java.util.List;
 
 public class ListApp extends JFrame {
     private JTable studentTable;
-    private JButton editButton;
-    private JButton deleteButton;
+    private JButton editButton, deleteButton, addButton;
     private AccountController accountController;
 
     public ListApp() {
@@ -42,9 +41,16 @@ public class ListApp extends JFrame {
         }
 
         JPanel buttonPanel = new JPanel();
+        addButton = new JButton("Thêm");
         editButton = new JButton("Sửa");
         deleteButton = new JButton("Xóa");
 
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openAddAccountDialog();
+            }
+        });
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,4 +99,9 @@ public class ListApp extends JFrame {
             tableModel.addRow(new Object[]{account.getId(), account.getUsername(), account.getPassword()});
         }
     }
+    private void openAddAccountDialog() {
+        AddAccountView addAccountView = new AddAccountView(this);
+        addAccountView.setVisible(true);
+    }
+
 }
