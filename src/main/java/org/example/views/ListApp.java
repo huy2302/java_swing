@@ -49,6 +49,7 @@ public class ListApp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openAddAccountDialog();
+                refreshTable();
             }
         });
         editButton.addActionListener(new ActionListener() {
@@ -57,8 +58,15 @@ public class ListApp extends JFrame {
                 int selectedRow = studentTable.getSelectedRow();
                 if (selectedRow != -1) {
                     int id = (int) studentTable.getValueAt(selectedRow, 0);
-                    JOptionPane.showMessageDialog(ListApp.this, "row: " + selectedRow);
+                    String username = (String) studentTable.getValueAt(selectedRow, 1);
+                    String password = (String) studentTable.getValueAt(selectedRow, 2);
 
+                    if (accountController.editAccount(id, username, password)) {
+                        JOptionPane.showMessageDialog(ListApp.this, "Cập nhật thành công");
+                        refreshTable();
+                    } else {
+                        JOptionPane.showMessageDialog(ListApp.this, "Cập nhật thất bại");
+                    }
                 }
             }
         });
@@ -82,6 +90,7 @@ public class ListApp extends JFrame {
             }
         });
 
+        buttonPanel.add(addButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         panel.add(buttonPanel, BorderLayout.SOUTH);

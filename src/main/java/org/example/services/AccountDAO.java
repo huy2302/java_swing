@@ -70,7 +70,44 @@ public class AccountDAO {
         return accounts;
     }
     public boolean addAccount(String username, String password) {
-        return true;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "INSERT INTO `taikhoan` (`id`, `username`, `password`) VALUES (NULL, '"+username+"', '"+password+"');";
+            preparedStatement = conn.prepareStatement(query);
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public boolean editAccount(int id, String username, String password) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "UPDATE `taikhoan` SET `username` = '"+username+"', password = '"+password+"' WHERE `taikhoan`.`id` = " + id;
+            preparedStatement = conn.prepareStatement(query);
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     public boolean deleteAccount(int id) {
         PreparedStatement preparedStatement = null;

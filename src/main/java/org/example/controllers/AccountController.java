@@ -25,6 +25,9 @@ public class AccountController {
     public boolean addAccount(String username, String password) {
         return accountDAO.addAccount(username, password);
     }
+    public boolean editAccount(int id, String username, String password) {
+        return accountDAO.editAccount(id, username, password);
+    }
     public boolean deleteAccount(int id) {
         return accountDAO.deleteAccount(id);
     }

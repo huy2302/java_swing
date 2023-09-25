@@ -39,7 +39,7 @@ public class AddAccountView extends JDialog {
                 // Thêm tài khoản
                 if (accountController.addAccount(username, password)) {
                     JOptionPane.showMessageDialog(AddAccountView.this, "Thêm tài khoản thành công");
-                    dispose(); // Đóng giao diện thêm tài khoản sau khi thêm thành công
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(AddAccountView.this, "Thêm tài khoản thất bại");
                 }
